@@ -1,0 +1,42 @@
+html,body{
+	height: 100%;
+}
+#articlePanel{
+	height: 100%;
+	padding-top: 2em;
+	box-sizing: border-box;
+	text-align: center;
+}
+#articleView{
+	height: calc(100% - 4em);
+	overflow: hidden;
+	box-sizing: border-box;
+}
+#article{
+	padding-bottom: 0;
+	text-align: left;
+}
+#iPage{
+	display: inline-block;
+	width: 6em;
+	height: 2em;
+	line-height: 2em;
+	margin-top: 1em;
+}
+
+#popPanel{
+	position: fixed;
+	min-width: 200px;
+	max-width: 300px;
+	background: #CCCCFF;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+#popPanel span{
+	margin-right: 1em;
+}
+#popPanel img{
+	width: 1em;
+	height: 1em;
+}
