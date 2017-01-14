@@ -9,8 +9,8 @@
     "content_scripts": [
         {
             "matches": ["https://www.theguardian.com/*/*/*"],
-            "css": ["mycss.css"],
-            "js": ["myscript.js"],
+            "css": ["style.css"],
+            "js": ["index.js"],
             "run_at": "document_end"
         }
     ],

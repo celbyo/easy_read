@@ -264,6 +264,5 @@
 		clickHidden()
 	}
 
-
 	main(); 
 })();
