@@ -9,14 +9,14 @@
     "content_scripts": [
         {
             "matches": ["https://www.theguardian.com/*/*/*"],
-            "css": ["style.css"],
-            "js": ["index.js"],
+            "css": ["css/style.css"],
+            "js": ["js/utils.js","js/index.js"],
             "run_at": "document_end"
         }
     ],
     "browser_action": {
         "default_icon": "img/icon.png",
-        "default_title": "扇贝查词"
+        "default_title": "干净阅读"
     },
     "permissions": [
         "http://*.shanbay.com/",
