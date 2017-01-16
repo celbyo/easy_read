@@ -1,29 +1,24 @@
 (function plugin (){
 
 var baseUrl = "https://api.shanbay.com/bdc/search/?word=",
-	hornUrl = "img/audio.png";
-
-var Dom = {
-	body: document.body,
-	article: document.getElementsByTagName("article")[0]
-};
-
-
+	hornUrl = "img/audio.png",
+	Dom = {
+		body: document.body,
+		article: document.getElementsByTagName("article")[0]
+	},
 // js创建元素id
-var articleContainerId = "plugin_articleContainer",
+    articleContainerId = "plugin_articleContainer",
 	articleViewId = "plugin_articleView",
-	vocCardId = "plugin_vocCard";
+	vocCardId = "plugin_vocCard",
+	ads = {
+		rmEle: ["content__labels","content__secondary-column","js-content-meta","element-rich-link","submeta","after-article","js-sport-tabs","js-ad-slot","ad_unit"],
+		rmClass:["js-article__body","js-content-main-column","js-secondary-column"]
+	},
+	pagesTotal = 0,      //分页总数
+	curPage = -1,        //当前页码 [0,pagesTotal)
+    viewH = 0;           //文档可视区域高度
 
-var ads = {
-	rmEle:["ad-slot-container","js-secondary-column","js-sport-tabs","element-rich-link","ad-slot","after-article","submeta","js-content-meta","content__labels","ad_unit","selection-sharing","kxhead","overlay"],
-	rmClass:["js-article__body","js-content-main-column","js-secondary-column"]
-}; 
-
-var pagesTotal = 0,      //分页总数
-	curPage = -1;        //当前页码 [0,pagesTotal)
-var viewH = 0;           //文档可视区域高度
-
-var pageEle = [];
+//var pageEle = [];
 
 /*
 	removeAllChild(node): 删除某个节点下所有子节点
@@ -53,6 +48,33 @@ function removeSpecialChild(className,parentNode){
 		eles[0].parentNode.removeChild(eles[0]);       //注意这里一定不能是eles[i],因为getElemensBy是动态的
 	}
 }
+
+/*
+	filterInnerAds(): 删除内嵌的div广告
+*/
+function filterInnerAds(){
+	for(var i=0; i<ads.rmEle.length; i++){
+		removeSpecialChild(ads.rmEle[i],Dom.body);
+	}
+	var eles = {};
+	for(i=0; i<ads.rmClass.length; i++){
+		eles = document.getElementsByClassName(ads.rmClass[i]);
+		for(var j=0; j<eles.length; j++){
+			removeClassName(eles[j],ads.rmClass[i]);
+		}
+	}
+}
+
+/*
+	filteriframeAds(): 隐藏iframe广告
+*/
+function filteriframeAds(){
+	var iframes = document.getElementsByTagName("iframe");
+	for(var i=0; i<iframes.length; i++){
+		iframes[i].style.width = 0;
+	}
+}
+
 
 // /*
 //     思路1: 根据article的子元素高度进行计算,分页
@@ -272,7 +294,6 @@ function layoutVocCard(e){
 	if(vocCardW + x > viewWidth){
 		offsetLeft = x - vocCardW;
 	}
-	console.log(vocCardH,y,halfLineH,vocCardH + y + halfLineH,viewHeight);
 	vocCard.style.left = offsetLeft + 'px';
 	vocCard.style.top = offsetTop + 'px';	
 }
@@ -308,16 +329,7 @@ function filterPage(){
 	articleContainer.appendChild(articleView);
 	articleView.appendChild(Dom.article);
 	// 广告过滤
-	for(var i=0; i<ads.rmEle.length; i++){
-		removeSpecialChild(ads.rmEle[i],Dom.body);
-	}
-	var eles = {};
-	for(i=0; i<ads.rmClass.length; i++){
-		eles = document.getElementsByClassName(ads.rmClass[i]);
-		for(var j=0; j<eles.length; j++){
-			removeClassName(eles[j],ads.rmClass[i]);
-		}
-	}
+	filterInnerAds();
 }
 
 /*
@@ -344,9 +356,11 @@ function main(){
 	selectTrans();
 	hideVocCard();
 	window.addEventListener('load',function(){
+		filteriframeAds();
+		// 去除fb分享
 		var fb = document.getElementsByClassName("selection-sharing")[0];
 		if(fb){
-			fb[0].parentNode.removeChild(fb[0]);
+			fb.parentNode.removeChild(fb);
 		}
 	});
 }

@@ -21,9 +21,8 @@ html,body{
 	width: 6em;
 	height: 2em;
 	line-height: 2em;
-	margin-top: 1em;
+	margin-top: 0.5em;
 }
-
 #plugin_vocCard{
 	position: fixed;
 	min-width: 200px;

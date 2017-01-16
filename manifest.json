@@ -1,7 +1,9 @@
 {  
     "name": "干净阅读",  
     "version": "1.0.0",  
-    "manifest_version": 2,  
+    "manifest_version": 2,
+    "author": "William.G",
+    "description":"1.对theguardian文章页进行过滤;2.根据屏幕进行分页;3.划词翻译",
     "icons": {  
         "16": "img/icon.png",
         "48": "img/logo_avatar.png"  
@@ -10,7 +12,7 @@
         {
             "matches": ["https://www.theguardian.com/*/*/*"],
             "css": ["css/style.css"],
-            "js": ["js/utils.js","js/index.js"],
+            "js": ["js/utils.js","js/content_script.js"],
             "run_at": "document_end"
         }
     ],
