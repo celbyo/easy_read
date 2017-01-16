@@ -190,8 +190,8 @@ function transSelected(e){
 	fillVocCard(json): 根据返回的json数据填充单词卡 
 */
 function fillVocCard(json){
-	var vocCard = document.getElementById(vocCardId);
-	var voc = {};
+	var vocCard = document.getElementById(vocCardId),
+	    voc = {};
 	if(!vocCard){
 		vocCard = createVocCard();
 	}
@@ -251,8 +251,8 @@ function createVocCard(){
 						"<span id='plugin_sound'></span>"+
 						"<div id='plugin_cn_trans'></div>";
 	//喇叭图标
-	var img = document.createElement("img");
-    var img_url = chrome.extension.getURL(hornUrl);
+	var img = document.createElement("img"),
+        img_url = chrome.extension.getURL(hornUrl);
     img.setAttribute("src", img_url);
     img.setAttribute("id", "plugin_horn");
 	img.setAttribute("alt", "horn");
@@ -277,15 +277,15 @@ function layoutVocCard(e){
 	var vocCard = document.getElementById(vocCardId);
 	vocCard.style.display = "block";
 	var x = e.pageX,
-		y = e.pageY;
-	var halfLineH = 0.5*parseInt(window.getComputedStyle(e.target).getPropertyValue("line-height"));
-	halfLineH = Math.ceil(halfLineH);
-	var viewWidth = getInner().width,
-		viewHeight = getInner().height;
-	var vocCardW = vocCard.offsetWidth,
-		vocCardH = vocCard.offsetHeight;
-	var offsetTop = y,
+		y = e.pageY,
+	    halfLineH = 0.5*parseInt(window.getComputedStyle(e.target).getPropertyValue("line-height")),
+	    viewWidth = getInner().width,
+		viewHeight = getInner().height,
+		vocCardW = vocCard.offsetWidth,
+		vocCardH = vocCard.offsetHeight,
+		offsetTop = y,
 		offsetLeft = x;
+	halfLineH = Math.ceil(halfLineH);
 	if(vocCardH + y + halfLineH > viewHeight){
 		offsetTop = y - vocCardH - halfLineH;
 	}else{
@@ -303,8 +303,8 @@ function layoutVocCard(e){
 */
 function hideVocCard(){
 	document.addEventListener("click",function (e){
-		var vocCard = document.getElementById(vocCardId);
-		var index = -1;
+		var vocCard = document.getElementById(vocCardId),
+		    index = -1;
 		if(vocCard&&vocCard.style.display!=="none"){
 			index = e.path.indexOf(vocCard);
 			if(index===-1){
@@ -321,10 +321,10 @@ function filterPage(){
 	// 清除body下所有子节点,只保留article区
 	removeAllChild(Dom.body);
 	// 在article外面包两层div. 第一层div为容器,包含article以及翻页区域;第二层为视图层,规定可视区大小
-	var articleContainer = document.createElement("div");
+	var articleContainer = document.createElement("div"),
+	    articleView = document.createElement('div');
 	articleContainer.id = articleContainerId;
 	Dom.body.appendChild(articleContainer);
-	var articleView = document.createElement('div');
 	articleView.id = articleViewId;
 	articleContainer.appendChild(articleView);
 	articleView.appendChild(Dom.article);

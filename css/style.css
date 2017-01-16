@@ -25,7 +25,6 @@ html,body{
 }
 #plugin_vocCard{
 	position: fixed;
-	min-width: 200px;
 	max-width: 300px;
 	background: #CCCCFF;
 	padding: 5px;
