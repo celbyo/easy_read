@@ -234,8 +234,8 @@ function fillVocCard(json){
 	}else{
 		img.style.display = "none";
 	}
-	//中文翻译,将\n替换成<br>换行标签
-	cn_trans.innerHTML = voc.cn_trans.replace(/\n/g,"<br>");
+	//中文翻译,将\n替换成<br />换行标签
+	cn_trans.innerHTML = voc.cn_trans.replace(/\n/g,"<br />");
 }
 
 /*
